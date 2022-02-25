@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+div {text-align: center;}
+</style>
+
+<body style="background-color:#824BCC;">
+<div>
+<h2>Equity Break Calculator</h2>
+
+<p>Input your time in HH:MM format to see when your next break should be!</p>
+
+<input type="text" placeholder="HH:MM" id="inputId">
+<button type="button" onclick="getInputValue();">Get Time</button>
+
+<p id="err"</p>
+<p id="short"></p>
+<p id="long"></p>
+
+</div>
+
+<script>
+
+function getInputValue() {
+  try {
+  	document.getElementById("err").innerHTML = ""
+    let inputVal = document.getElementById("inputId").value;
+    var split = inputVal.split(":")
+
+    if (split.length !== 2){
+      throw 'oops'
+    }
+
+    var hrs = parseInt(split[0]);
+    var min = parseInt (split[1]);
+    var hrs1 = hrs
+    var hrs2 = hrs
+    var Nmin1 = 0
+    var Nmin2 = 0
+
+    // do shrt
+    var shrt = min + 55;
+
+
+    if (shrt >= 60) {
+    hrs1 = hrs1 + 1;
+    }
+    backHrs = hrs+1
+
+    var Nmin1 = shrt % 60
+    if(Nmin1 < 10) {
+    Nmin1 = "0"+ Nmin1
+    }
+
+    if(min < 10) {
+      min= "0"+min
+    }
+
+    //do long
+    var lng = min + 20
+    var hrs2 = hrs + 1
+
+    if (lng >= 60) {
+    hrs2=hrs2+1
+    }
+
+    var Nmin2 = lng % 60
+     if(Nmin2 < 10) {
+      Nmin2 = "0"+ Nmin2
+    }
+
+    Nmin3 = Nmin2 + 10
+    hrs3 = hrs2
+
+    if (Nmin3 > 60) {
+      Nmin3 = Nmin3 % 60
+      hrs3 = hrs3 + 1
+    }
+
+    if (Nmin3 < 10) {
+      Nmin3 = "0" + Nmin3
+    }
+
+
+    //7:30 + 1:20 = 8:50
+    //7:50 + 1:20 = 8+1:10
+
+
+    document.getElementById("short").innerHTML =
+    "The 5 min break time is: " + hrs1 + ":" + Nmin1 + ", back at: " + backHrs + ":" + min;
+
+    document.getElementById("long").innerHTML =
+    "The 10 min break time is: " + hrs2 + ":" + Nmin2 + ", back at: " + hrs3 + ":" + Nmin3;
+   } catch (e){
+   document.getElementById("err").innerHTML =
+  "Please make sure to enter time in HH:MM format";
+   }
+
+ }
+</script>
+
+</body>
+</html>
