@@ -61,7 +61,9 @@ function getInputValue() {
 
     //do long
     var lng = min + 20
-    var hrs2 = hrs
+    var hrs2 = hrs + 1
+    hrs3 = hrs2
+
 
     if (lng >= 60) {
     hrs2=hrs2+1
@@ -73,7 +75,6 @@ function getInputValue() {
     }
 
     Nmin3 = Nmin2 + 10
-    hrs3 = hrs2
 
     if (Nmin3 > 60) {
       Nmin3 = Nmin3 % 60
